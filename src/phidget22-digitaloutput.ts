@@ -73,6 +73,7 @@ module.exports = function (RED: nodeRED.NodeAPI) {
         }
         case 'setState': {
           invokeMethod(() => digitalOutput.setState(msg.payload?.state), 'setState');
+          break;
         }
         default: {
           node.error('Unsupported message topic: ' + msg.topic);
