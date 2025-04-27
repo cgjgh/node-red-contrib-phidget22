@@ -1,6 +1,6 @@
 {
-  "name": "node-red-contrib-phidget22",
-  "version": "2.0.1",
+  "name": "@cgjgh/node-red-contrib-phidget22",
+  "version": "2.0.4",
   "description": "Provides access to input, output, and sensor channels from Phidgets devices.",
   "dependencies": {
     "phidget22-net": "^3.17.4"
@@ -8,8 +8,9 @@
   "devDependencies": {
     "@types/node": "^12.20.16",
     "@types/node-red": "^1.1.1",
+    "copyfiles": "^2.4.1",
     "eslint": "^7.32.0",
-    "prettier": "2.8.7",
+    "prettier": "^2.8.7",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
@@ -21,14 +22,16 @@
     "dist/*"
   ],
   "scripts": {
-    "build": "tsc --skipLibCheck && cp ./src/*.html ./dist/ && cp -r ./static ./dist/ && cp -r ./icons ./dist/",
+    "build": "tsc --skipLibCheck && copyfiles -u 1 src/**/*.html dist/ && copyfiles static/** dist && copyfiles icons/** dist", 
     "clean": "rm -rf ./dist",
     "check": "npx prettier --check ./src/*",
     "format": "npx prettier --write ./src/*",
     "prepublish": "npm run check && npm run build"
   },
   "author": "Michael Paradis",
-  "contributors": ["Kathy Camenzind"],
+  "contributors": [
+    "Kathy Camenzind"
+  ],
   "license": "MIT",
   "node-red": {
     "nodes": {
@@ -67,5 +70,8 @@
       "phidget22-voltageoutput": "./dist/phidget22-voltageoutput.js",
       "phidget22-voltageratioinput": "./dist/phidget22-voltageratioinput.js"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
